@@ -12,8 +12,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        intStreamPush();
-       intStreamPop();
+//        intStreamPush();
+//       intStreamPop();
+
+        Object[] arr = new Object[10];
+        System.out.println(arr.length);
 
     }
 

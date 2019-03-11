@@ -1,4 +1,5 @@
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Set;
@@ -33,5 +34,6 @@ public class MainTest {
                 .peek(System.out::println)
                 .collect(Collectors.toSet());
         System.out.println("set size: "+set.size());
+        Assert.assertTrue(set.size()==50);
     }
 }
