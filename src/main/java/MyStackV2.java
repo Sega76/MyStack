@@ -1,6 +1,3 @@
-package v2;
-
-
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MyStackV2<T> {
