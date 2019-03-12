@@ -41,7 +41,7 @@ public class MainTest {
 
         Thread.sleep(1000L);
 
-        System.out.println("next " + stack.getNext());
+        System.out.println("next: " + stack.getNext());
         Assert.assertTrue(stack.getNext() == size);
     }
 
@@ -61,7 +61,7 @@ public class MainTest {
 
         Thread.sleep(1000L);
 
-        System.out.println("size "+set.size());
+        System.out.println("size: "+set.size());
         Assert.assertTrue(set.size() == size);
 
     }

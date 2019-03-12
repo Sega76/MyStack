@@ -24,6 +24,18 @@ public class MyStackTest {
         intStreamPop(size);
     }
 
+    @Test
+    public void notNull() {
+        myStack = new MyStack<>();
+        try {
+            myStack.push(null);
+            Assert.fail();
+        } catch (NullPointerException e){
+        }
+
+
+    }
+
     public void intStreamPush(int size) {
         IntStream.range(0, size)
                 .parallel()
@@ -32,7 +44,7 @@ public class MyStackTest {
                         }
                 );
 
-        System.out.println("next "+ myStack.getNext());
+        System.out.println("next: "+ myStack.getNext());
         Assert.assertTrue(myStack.getNext() == size);
 
     }
