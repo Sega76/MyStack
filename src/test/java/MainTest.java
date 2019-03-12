@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 
 public class MainTest {
@@ -22,32 +20,12 @@ public class MainTest {
     public void mainTest() throws InterruptedException {
         int size = 50_000;
 
-//        intStreamPush(size);
         pushTest(size);
 
         Thread.sleep(1000L);
 
-        System.out.println("next " + stack.getNext());
-//        intStreamPop(size);
         popTest(size);
 
-    }
-
-    public void intStreamPush(int size) {
-        IntStream.range(0, size)
-                .parallel()
-                .forEach(i -> stack.push("line_" + i));
-        Assert.assertTrue(stack.getNext() == size);
-
-    }
-
-    public void intStreamPop(int size) {
-        Set<String> set = IntStream.range(0, size)
-                .parallel()
-                .mapToObj(t -> stack.pop())
-                .collect(Collectors.toSet());
-        System.out.println("set size: " + set.size());
-        Assert.assertTrue(set.size() == size);
     }
 
     public void pushTest(int size) throws InterruptedException {
@@ -62,6 +40,8 @@ public class MainTest {
         }
 
         Thread.sleep(1000L);
+
+        System.out.println("next " + stack.getNext());
         Assert.assertTrue(stack.getNext() == size);
     }
 
@@ -76,15 +56,13 @@ public class MainTest {
                 if (s != null) {
                     set.add(s);
                 }
-            }
-            ).start();
+            }).start();
         }
 
         Thread.sleep(1000L);
+
         System.out.println("size "+set.size());
         Assert.assertTrue(set.size() == size);
 
     }
-
-
 }

@@ -31,6 +31,7 @@ public class MyStackTest {
                             myStack.push("line_" + i);
                         }
                 );
+
         System.out.println("next "+ myStack.getNext());
         Assert.assertTrue(myStack.getNext() == size);
 
@@ -42,6 +43,8 @@ public class MyStackTest {
                 .mapToObj(i -> myStack.pop())
                 .filter(s -> s != null)
                 .collect(Collectors.toSet());
+
+
         System.out.println("size: " + set.size());
         Assert.assertTrue(set.size() == size);
     }
