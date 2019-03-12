@@ -32,7 +32,6 @@ public class MyStack<T> {
 
     public synchronized T peek() {
         if(next==0){
-//            throw new NullPointerException();
             return null;
         }
         return (T)arr[next-1];
