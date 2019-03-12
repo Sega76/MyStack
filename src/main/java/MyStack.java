@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class MyStack<T> {
+
     private Object[] arr;
     private volatile int next;
     private volatile int size;
@@ -22,7 +23,7 @@ public class MyStack<T> {
     }
 
     public synchronized T pop() {
-            if (next - 1 < 0) {
+            if (next == 0) {
                 return null;
             }
             next--;
@@ -30,7 +31,8 @@ public class MyStack<T> {
     }
 
     public synchronized T peek() {
-        if(next-1<0){
+        if(next==0){
+//            throw new NullPointerException();
             return null;
         }
         return (T)arr[next-1];

@@ -14,37 +14,38 @@ public class MyStackTest {
 
     @Test
     public void push() {
+        int size = 50_000;
         myStack2 = new MyStack<>();
-        intStreamPush();
+        intStreamPush(size);
     }
 
     @Test
     public void pop() {
+        int size = 50_000;
         myStack2 = new MyStack<>();
-        intStreamPush();
-        intStreamPop();
+        intStreamPush(size);
+        intStreamPop(size);
     }
 
-    public void intStreamPush() {
-        IntStream.range(0, 50)
+    public void intStreamPush(int size) {
+        IntStream.range(0, size)
                 .parallel()
                 .forEach(i -> {
                             myStack2.push("line_" + i);
-//                            System.out.println(i);
                         }
                 );
-        Assert.assertTrue(myStack2.getNext()==50);
+
+        Assert.assertTrue(myStack2.getNext()==size);
 
     }
 
-    public void intStreamPop() {
-        Set<String> set = IntStream.range(0, 50)
+    public void intStreamPop(int size) {
+        Set<String> set = IntStream.range(0, size)
                 .parallel()
                 .mapToObj(t -> myStack2.pop())
-//                .peek(System.out::println)
                 .collect(Collectors.toSet());
-        System.out.println("set size: " + set.size());
-        Assert.assertTrue(set.size() == 50);
+        System.out.println("size: " + set.size());
+        Assert.assertTrue(set.size() == size);
     }
 
 }
