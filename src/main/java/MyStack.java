@@ -1,43 +1,46 @@
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyStack<T> {
-    private volatile Object[] arr;
-    private volatile AtomicInteger next = new AtomicInteger();
-    private volatile AtomicInteger size = new AtomicInteger();
+    private Object[] arr;
+    private volatile int next;
+    private volatile int size;
 
     public MyStack() {
         arr = new Object[10];
-        next.set(0);
-        size.set(arr.length);
+        next=0;
+        size=arr.length;
     }
 
     public synchronized T push(T item) {
-        if (next.get()==size.get()){
-            size.set(size.get()*2);
-            arr = Arrays.copyOf(arr, size.get());
-        }
-        arr[next.get()]=item;
-        next.incrementAndGet();
-        return (T)arr[next.get()-1];
+            if (next == size) {
+                size = size * 2;
+                arr = Arrays.copyOf(arr, size);
+            }
+            arr[next] = item;
+            next++;
+            return (T) arr[next - 1];
     }
 
     public synchronized T pop() {
-        if(next.get()-1<0){
-            return null;
-        }
-        return (T)arr[next.decrementAndGet()];
+            if (next - 1 < 0) {
+                return null;
+            }
+            next--;
+            return (T) arr[next];
     }
 
     public synchronized T peek() {
-        if(next.get()-1<0){
+        if(next-1<0){
             return null;
         }
-        return (T)arr[next.get()-1];
+        return (T)arr[next-1];
     }
 
     public boolean empty() {
-        return next.get()==0;
+        return next==0;
     }
 
+    public int getNext() {
+        return next;
+    }
 }
