@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,6 +21,7 @@ public class MainTest {
     @Test
     public void mainTest() throws InterruptedException {
         int size = 50_000;
+
 //        intStreamPush(size);
         pushTest(size);
 
