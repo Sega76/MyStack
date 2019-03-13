@@ -3,19 +3,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MainTest {
-    MyStackV2<String> stack;
-    Set<Thread> list = new HashSet<>();
+    MyStack<String> stack;
+    AtomicInteger counter = new AtomicInteger();
+
 
     @Before
     public void init() {
-        stack = new MyStackV2<>();
+        stack = new MyStack<>();
     }
 
     @Test
     public void mainTest() throws InterruptedException {
+        counter.set(0);
         int size = 50_000;
 
         pushTest(size);
@@ -32,27 +35,17 @@ public class MainTest {
             Thread thread = new Thread(()->{
                 String s = "line_" + finalI;
                 stack.push(s);
+                counter.incrementAndGet();
             });
-            list.add(thread);
             thread.start();
         }
 
-        list.stream()
-                .filter(t->t.isAlive())
-                .forEach(t->{
-            if (t.isAlive()) {
-                try {
-                    t.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
+        while(counter.get()!=size){ }
 
     }
 
     public void popTest(int size) throws InterruptedException {
+        counter.set(0);
         Set<String> set = Collections.synchronizedSet(new HashSet<String>());
 
         System.out.println("popTest");
@@ -62,21 +55,12 @@ public class MainTest {
                 String s = stack.pop();
                 if (s != null) {
                     set.add(s);
+                    counter.incrementAndGet();
                 }
             }).start();
         }
 
-        list.stream()
-                .filter(t->t.isAlive())
-                .forEach(t->{
-                    if (t.isAlive()) {
-                        try {
-                            t.join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+        while(counter.get()!=size){ }
 
         System.out.println("size: "+set.size());
         Assert.assertTrue(set.size() == size);

@@ -2,17 +2,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MyStackV2Test {
-    MyStackV2<String> myStack;
-
+public class MyStackTest {
+    MyStack<String> myStack;
 
     @Test
     public void pop() {
         int size = 50_000;
-        myStack = new MyStackV2();
+        myStack = new MyStack();
         intStreamPush(size);
         intStreamPop(size);
     }
@@ -23,6 +23,7 @@ public class MyStackV2Test {
                 .parallel()
                 .forEach(i -> {
                             myStack.push("line_" + i);
+
                         }
                 );
     }

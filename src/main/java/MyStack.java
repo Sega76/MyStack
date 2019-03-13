@@ -1,8 +1,8 @@
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MyStackV2<T> {
+public class MyStack<T> {
 
-    public MyStackV2() {
+    public MyStack() {
     }
 
     private final AtomicReference<Node<T>> top = new AtomicReference<>(null);
