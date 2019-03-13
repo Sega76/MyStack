@@ -11,6 +11,7 @@ public class MainTest {
     AtomicInteger counter = new AtomicInteger();
 
 
+
     @Before
     public void init() {
         stack = new MyStack<>();
@@ -18,7 +19,7 @@ public class MainTest {
 
     @Test
     public void mainTest() throws InterruptedException {
-        counter.set(0);
+
         int size = 50_000;
 
         pushTest(size);
@@ -28,6 +29,7 @@ public class MainTest {
     }
 
     public void pushTest(int size) throws InterruptedException {
+        counter.set(0);
         System.out.println("pushTest");
 
         for (int i = 0; i < size; i++) {
