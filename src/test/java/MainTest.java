@@ -8,13 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainTest {
     MyStack<String> stack;
-    AtomicInteger counter = new AtomicInteger();
+    AtomicInteger counter;
 
 
 
     @Before
     public void init() {
         stack = new MyStack<>();
+        counter = new AtomicInteger();
     }
 
     @Test
